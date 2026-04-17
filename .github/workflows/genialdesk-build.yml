@@ -13,8 +13,8 @@ on:
       - "server/**"
 
 env:
-  RUST_VERSION: "1.75"
-  SCITER_RUST_VERSION: "1.75"
+  RUST_VERSION: "1.82"
+  SCITER_RUST_VERSION: "1.82"
   FLUTTER_VERSION: "3.24.5"
   LLVM_VERSION: "15.0.6"
   VERSION: "1.4.6"
