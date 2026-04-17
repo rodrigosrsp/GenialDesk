@@ -839,7 +839,7 @@ pub fn session_load_last_transfer_jobs(session_id: SessionID) {
     } else {
         // a tip for flutter dev
         eprintln!(
-            "cannot load last transfer job from non-existed session. Please ensure session \
+            "cannot load last transfer job from non-existed session. Please ensure session 
         is connected before calling load last transfer jobs."
         );
     }
@@ -1998,8 +1998,13 @@ pub fn session_get_conn_session_id(session_id: SessionID) -> SyncReturn<String> 
 pub fn session_alternative_codecs(session_id: SessionID) -> String {
     if let Some(session) = sessions::get_session_by_session_id(&session_id) {
         let (vp8, av1, h264, h265) = session.alternative_codecs();
-        let msg = HashMap::from([("vp8", vp8), ("av1", av1), ("h264", h264), ("h265", h265)]);
-        serde_json::ser::to_string(&msg).unwrap_or("".to_owned())
+        let msg = HashMap::from([
+            ("vp8", vp8),
+            ("av1", av1),
+            ("h264", h264),
+            ("h265", h265),
+        ]);
+        serde_json::to_string(&msg).unwrap_or("".to_owned())
     } else {
         String::new()
     }
@@ -3078,5 +3083,16 @@ pub mod server_side {
         _class: JClass,
     ) -> jboolean {
         jboolean::from(crate::server::is_clipboard_service_ok())
+    }
+}
+pub fn main_start_oauth() {
+    let api_server = get_api_server("".to_string(), "".to_string());
+    if api_server.is_empty() {
+        log::error!("API server is not configured. Cannot start OAuth flow.");
+        return;
+    }
+    let url = format!("{}/api/auth/google", api_server);
+    if let Err(e) = opener::open(&url) {
+        log::error!("Failed to open OAuth URL {}: {}", url, e);
     }
 }

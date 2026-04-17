@@ -93,6 +93,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
       if (!isOutgoingOnly) buildPasswordBoard(context),
+      if (!isOutgoingOnly) buildLoginButton(context),
       FutureBuilder<Widget>(
         future: Future.value(
             Obx(() => buildHelpCards(stateGlobal.updateUrl.value))),
@@ -213,7 +214,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          translate("ID"),
+                          translate("Genial ID"),
                           style: TextStyle(
                               fontSize: 14,
                               color: Theme.of(context)
@@ -288,6 +289,26 @@ class _DesktopHomePageState extends State<DesktopHomePage>
             return buildPasswordBoard2(context, model);
           },
         ));
+  }
+
+  buildLoginButton(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10, left: 20, right: 16),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton.icon(
+              icon: Icon(Icons.login),
+              label: Text(translate("Login with Google")),
+              onPressed: () => bind.mainStartOauth(),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white, backgroundColor: MyTheme.accent,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   buildPasswordBoard2(BuildContext context, ServerModel model) {

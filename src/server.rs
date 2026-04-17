@@ -193,6 +193,10 @@ pub async fn create_tcp_connection(
     secure: bool,
     control_permissions: Option<ControlPermissions>,
 ) -> ResultType<()> {
+    if !crate::telemetry::TRUST_STATE.load(std::sync::atomic::Ordering::SeqCst) {
+        log::warn!("Blocking untrusted incoming connection from {}", addr);
+        bail!("Connection rejected: agent is not trusted. Please log in.");
+    }
     let mut stream = stream;
     let id = server.write().unwrap().get_new_id();
     let (sk, pk) = Config::get_key_pair();
