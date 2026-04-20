@@ -3086,7 +3086,7 @@ pub mod server_side {
     }
 }
 pub fn main_start_oauth() {
-    let api_server = get_api_server("".to_string(), "".to_string());
+    let api_server = get_api_server();
     if api_server.is_empty() {
         log::error!("API server is not configured. Cannot start OAuth flow.");
         return;

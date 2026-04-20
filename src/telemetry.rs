@@ -51,7 +51,7 @@ pub fn start_telemetry_loop() {
         tokio::time::sleep(std::time::Duration::from_secs(60)).await;
 
         loop {
-            let api_server = crate::get_api_server("".to_string(), "".to_string());
+            let api_server = crate::ui_interface::get_api_server();
             if api_server.is_empty() {
                 log::warn!("API server not configured. Telemetry check-in skipped.");
                 TRUST_STATE.store(false, Ordering::SeqCst);
