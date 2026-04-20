@@ -64,10 +64,10 @@ class ToolbarState {
     _isInitializing = true;
 
     try {
-      collapse.value = bind.sessionGetToggleOption(
+      collapse.value = await bind.sessionGetToggleOption(
               sessionId: sessionId, arg: kOptionCollapseToolbar) ??
           false;
-      hide.value = bind.sessionGetToggleOption(
+      hide.value = await bind.sessionGetToggleOption(
               sessionId: sessionId, arg: kOptionHideToolbar) ??
           false;
     } finally {
