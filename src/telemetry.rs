@@ -3,7 +3,7 @@ use hbb_common::{
     config::Config,
     get_uuid,
     log,
-    sysinfo::{System, SystemExt, CpuExt, DiskExt},
+    sysinfo::System,
     tokio,
 };
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -14,16 +14,10 @@ pub static TRUST_STATE: AtomicBool = AtomicBool::new(false);
 #[derive(Serialize, Debug)]
 struct Telemetry {
     agent_id: String,
-    hostname: String,
     os_name: String,
-    os_version: String,
     os_arch: String,
-    cpu_model: String,
     cpu_cores: usize,
     ram_total_mb: u64,
-    ram_used_mb: u64,
-    disk_total_gb: u64,
-    disk_free_gb: u64,
     rustdesk_id: String,
 }
 
@@ -37,25 +31,16 @@ struct CheckinResponse {
 }
 
 fn gather_telemetry() -> Telemetry {
-    let mut sys = System::new_all();
-    sys.refresh_all();
-
-    let (disk_total, disk_free) = sys.disks().iter().fold((0u64, 0u64), |(total, free), disk| {
-        (total + disk.total_space(), free + disk.available_space())
-    });
+    let mut sys = System::new();
+    sys.refresh_memory();
+    sys.refresh_cpu();
 
     Telemetry {
         agent_id: hex::encode(get_uuid()),
-        hostname: sys.host_name().unwrap_or_default(),
-        os_name: sys.name().unwrap_or_default(),
-        os_version: sys.os_version().unwrap_or_default(),
-        os_arch: System::cpu_arch().unwrap_or_default(),
-        cpu_model: sys.global_cpu_info().brand().to_string(),
+        os_name: std::env::consts::OS.to_string(),
+        os_arch: std::env::consts::ARCH.to_string(),
         cpu_cores: sys.cpus().len(),
         ram_total_mb: sys.total_memory() / 1024 / 1024,
-        ram_used_mb: sys.used_memory() / 1024 / 1024,
-        disk_total_gb: disk_total / 1_073_741_824,
-        disk_free_gb: disk_free / 1_073_741_824,
         rustdesk_id: Config::get_id(),
     }
 }
