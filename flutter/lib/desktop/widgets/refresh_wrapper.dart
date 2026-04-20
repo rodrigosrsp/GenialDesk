@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hbb/common.dart';
-import 'package:flutter_hbb/main.dart';
+import 'package:genial_desk/common.dart';
+import 'package:genial_desk/main.dart';
 import 'package:get/get.dart';
 
 class RefreshWrapper extends StatefulWidget {

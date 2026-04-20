@@ -2,9 +2,9 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_hbb/common.dart';
-import 'package:flutter_hbb/models/model.dart';
-import 'package:flutter_hbb/models/server_model.dart';
+import 'package:genial_desk/common.dart';
+import 'package:genial_desk/models/model.dart';
+import 'package:genial_desk/models/server_model.dart';
 import 'package:get/get.dart';
 import 'file_model.dart';
 

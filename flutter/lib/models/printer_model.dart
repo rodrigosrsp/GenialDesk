@@ -1,6 +1,6 @@
-import 'package:flutter_hbb/common.dart';
-import 'package:flutter_hbb/consts.dart';
-import 'package:flutter_hbb/models/platform_model.dart';
+import 'package:genial_desk/common.dart';
+import 'package:genial_desk/consts.dart';
+import 'package:genial_desk/models/platform_model.dart';
 
 class PrinterOptions {
   String action;

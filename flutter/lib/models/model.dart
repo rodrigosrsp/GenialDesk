@@ -10,27 +10,27 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_hbb/common/widgets/peers_view.dart';
-import 'package:flutter_hbb/consts.dart';
-import 'package:flutter_hbb/models/ab_model.dart';
-import 'package:flutter_hbb/models/chat_model.dart';
-import 'package:flutter_hbb/models/cm_file_model.dart';
-import 'package:flutter_hbb/models/file_model.dart';
-import 'package:flutter_hbb/models/group_model.dart';
-import 'package:flutter_hbb/models/peer_model.dart';
-import 'package:flutter_hbb/models/peer_tab_model.dart';
-import 'package:flutter_hbb/models/printer_model.dart';
-import 'package:flutter_hbb/models/server_model.dart';
-import 'package:flutter_hbb/models/user_model.dart';
-import 'package:flutter_hbb/models/state_model.dart';
-import 'package:flutter_hbb/models/desktop_render_texture.dart';
-import 'package:flutter_hbb/models/terminal_model.dart';
-import 'package:flutter_hbb/plugin/event.dart';
-import 'package:flutter_hbb/plugin/manager.dart';
-import 'package:flutter_hbb/plugin/widgets/desc_ui.dart';
-import 'package:flutter_hbb/common/shared_state.dart';
-import 'package:flutter_hbb/utils/multi_window_manager.dart';
-import 'package:flutter_hbb/utils/http_service.dart' as http;
+import 'package:genial_desk/common/widgets/peers_view.dart';
+import 'package:genial_desk/consts.dart';
+import 'package:genial_desk/models/ab_model.dart';
+import 'package:genial_desk/models/chat_model.dart';
+import 'package:genial_desk/models/cm_file_model.dart';
+import 'package:genial_desk/models/file_model.dart';
+import 'package:genial_desk/models/group_model.dart';
+import 'package:genial_desk/models/peer_model.dart';
+import 'package:genial_desk/models/peer_tab_model.dart';
+import 'package:genial_desk/models/printer_model.dart';
+import 'package:genial_desk/models/server_model.dart';
+import 'package:genial_desk/models/user_model.dart';
+import 'package:genial_desk/models/state_model.dart';
+import 'package:genial_desk/models/desktop_render_texture.dart';
+import 'package:genial_desk/models/terminal_model.dart';
+import 'package:genial_desk/plugin/event.dart';
+import 'package:genial_desk/plugin/manager.dart';
+import 'package:genial_desk/plugin/widgets/desc_ui.dart';
+import 'package:genial_desk/common/shared_state.dart';
+import 'package:genial_desk/utils/multi_window_manager.dart';
+import 'package:genial_desk/utils/http_service.dart' as http;
 import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img2;
 import 'package:flutter_svg/flutter_svg.dart';
@@ -45,12 +45,12 @@ import '../utils/image.dart' as img;
 import '../common/widgets/dialog.dart';
 import 'input_model.dart';
 import 'platform_model.dart';
-import 'package:flutter_hbb/utils/scale.dart';
+import 'package:genial_desk/utils/scale.dart';
 
-import 'package:flutter_hbb/generated_bridge.dart'
-    if (dart.library.html) 'package:flutter_hbb/web/bridge.dart';
-import 'package:flutter_hbb/native/custom_cursor.dart'
-    if (dart.library.html) 'package:flutter_hbb/web/custom_cursor.dart';
+import 'package:genial_desk/generated_bridge.dart'
+    if (dart.library.html) 'package:genial_desk/web/bridge.dart';
+import 'package:genial_desk/native/custom_cursor.dart'
+    if (dart.library.html) 'package:genial_desk/web/custom_cursor.dart';
 
 typedef HandleMsgBox = Function(Map<String, dynamic> evt, String id);
 typedef ReconnectHandle = Function(OverlayDialogManager, SessionID, bool);

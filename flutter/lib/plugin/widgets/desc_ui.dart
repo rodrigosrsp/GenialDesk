@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hbb/common.dart';
-import 'package:flutter_hbb/models/model.dart';
+import 'package:genial_desk/common.dart';
+import 'package:genial_desk/models/model.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 // to-do: do not depend on desktop
-import 'package:flutter_hbb/desktop/widgets/remote_toolbar.dart';
-import 'package:flutter_hbb/models/platform_model.dart';
+import 'package:genial_desk/desktop/widgets/remote_toolbar.dart';
+import 'package:genial_desk/models/platform_model.dart';
 
 import '../manager.dart';
 import '../model.dart';

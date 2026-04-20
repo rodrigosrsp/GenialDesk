@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_hbb/common.dart';
-import 'package:flutter_hbb/consts.dart';
+import 'package:genial_desk/common.dart';
+import 'package:genial_desk/consts.dart';
 
-import 'package:flutter_hbb/models/peer_model.dart';
+import 'package:genial_desk/models/peer_model.dart';
 
 import '../../models/platform_model.dart';
 
