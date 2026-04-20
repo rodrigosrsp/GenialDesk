@@ -1,6 +1,11 @@
 use serde::{Serialize, Deserialize};
-use sysinfo::{System, SystemExt, CpuExt, DiskExt};
-use hbb_common::{config::Config, platform, get_uuid, log};
+use hbb_common::{
+    config::Config,
+    get_uuid,
+    log,
+    sysinfo::{System, SystemExt, CpuExt, DiskExt},
+    tokio,
+};
 use std::sync::atomic::{AtomicBool, Ordering};
 
 const TELEMETRY_INTERVAL_S: u64 = 300; // 5 minutes
@@ -19,7 +24,6 @@ struct Telemetry {
     ram_used_mb: u64,
     disk_total_gb: u64,
     disk_free_gb: u64,
-    software: Vec<platform::windows::Software>,
     rustdesk_id: String,
 }
 
@@ -36,7 +40,7 @@ fn gather_telemetry() -> Telemetry {
     let mut sys = System::new_all();
     sys.refresh_all();
 
-    let (disk_total, disk_free) = sys.disks().iter().fold((0, 0), |(total, free), disk| {
+    let (disk_total, disk_free) = sys.disks().iter().fold((0u64, 0u64), |(total, free), disk| {
         (total + disk.total_space(), free + disk.available_space())
     });
 
@@ -52,7 +56,6 @@ fn gather_telemetry() -> Telemetry {
         ram_used_mb: sys.used_memory() / 1024 / 1024,
         disk_total_gb: disk_total / 1_073_741_824,
         disk_free_gb: disk_free / 1_073_741_824,
-        software: platform::get_installed_software(),
         rustdesk_id: Config::get_id(),
     }
 }
@@ -73,7 +76,7 @@ pub fn start_telemetry_loop() {
 
             let checkin_url = format!("{}/api/agent/checkin", api_server);
             let telemetry_data = gather_telemetry();
-            
+
             match serde_json::to_string(&telemetry_data) {
                 Ok(json_body) => {
                     log::info!("Sending telemetry check-in to {}", checkin_url);
