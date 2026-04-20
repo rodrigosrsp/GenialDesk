@@ -5,7 +5,7 @@ import 'package:genial_desk/generated_bridge.dart'
 final platformFFI = PlatformFFI.instance;
 final localeName = PlatformFFI.localeName;
 
-RustdeskImpl get bind => platformFFI.ffiBind;
+GenialdeskImpl get bind => platformFFI.ffiBind;
 
 String ffiGetByName(String name, [String arg = '']) {
   return PlatformFFI.getByName(name, arg);
