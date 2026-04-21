@@ -3091,7 +3091,8 @@ pub fn main_start_oauth() {
         log::error!("API server is not configured. Cannot start OAuth flow.");
         return;
     }
-    let url = format!("{}/api/auth/google", api_server);
+    let device_id = get_id();
+    let url = format!("{}/api/auth/google?device_id={}", api_server, device_id);
     if let Err(e) = opener::open(&url) {
         log::error!("Failed to open OAuth URL {}: {}", url, e);
     }
